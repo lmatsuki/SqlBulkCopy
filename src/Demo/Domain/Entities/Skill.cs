@@ -2,10 +2,11 @@
 {
     public class Skill
     {
-        public Skill(int playerId, string name)
+        public Skill(int playerId, string name, int correlationId)
         {
             PlayerId = playerId;
             Name = name;
+            CorrelationId = correlationId;
         }
 
         public int Id { get; set; }
@@ -15,5 +16,6 @@
         public decimal Cooldown { get; set; }
         public int Level { get; set; }
         public bool IsLearned { get; set; }
+        public int CorrelationId { get; set; }
     }
 }
