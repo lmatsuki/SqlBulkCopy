@@ -1,12 +1,26 @@
-﻿using System;
+﻿using Demo.Inserters;
+using System;
 
 namespace Demo
 {
-    class Program
+    public class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            try
+            {
+                // Instantiate implementation
+                IInserter inserter = new EntityFrameworkInserter();
+                //IInserter inserter = new SqlBulkCopyInserter();
+
+                // Specify record count
+                inserter.InsertRecords(100000);
+                inserter.DeleteRecords();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
         }
     }
 }
