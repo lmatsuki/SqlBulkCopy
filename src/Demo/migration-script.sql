@@ -20,6 +20,7 @@ CREATE TABLE [Players] (
     [MagicAttack] int NOT NULL,
     [MagicDefense] int NOT NULL,
     [Level] int NOT NULL,
+    [CorrelationId] int NOT NULL,
     CONSTRAINT [PK_Players] PRIMARY KEY ([Id])
 );
 
@@ -33,6 +34,7 @@ CREATE TABLE [Skills] (
     [Cooldown] decimal(18,2) NOT NULL,
     [Level] int NOT NULL,
     [IsLearned] bit NOT NULL,
+    [CorrelationId] int NOT NULL,
     CONSTRAINT [PK_Skills] PRIMARY KEY ([Id]),
     CONSTRAINT [FK_Skills_Players_PlayerId] FOREIGN KEY ([PlayerId]) REFERENCES [Players] ([Id]) ON DELETE CASCADE
 );
@@ -44,7 +46,7 @@ CREATE INDEX [IX_Skills_PlayerId] ON [Skills] ([PlayerId]);
 GO
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
-VALUES (N'20200526060013_InitialCreate', N'3.1.4');
+VALUES (N'20200526064642_InitialCreate', N'3.1.4');
 
 GO
 
