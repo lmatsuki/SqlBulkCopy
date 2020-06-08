@@ -28,6 +28,9 @@ namespace Demo.Migrations
                     b.Property<int>("Attack")
                         .HasColumnType("int");
 
+                    b.Property<int>("CorrelationId")
+                        .HasColumnType("int");
+
                     b.Property<int>("Defense")
                         .HasColumnType("int");
 
@@ -66,6 +69,9 @@ namespace Demo.Migrations
 
                     b.Property<decimal>("Cooldown")
                         .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("CorrelationId")
+                        .HasColumnType("int");
 
                     b.Property<int>("Cost")
                         .HasColumnType("int");

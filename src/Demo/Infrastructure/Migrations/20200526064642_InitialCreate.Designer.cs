@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Demo.Migrations
 {
     [DbContext(typeof(GameContext))]
-    [Migration("20200526060013_InitialCreate")]
+    [Migration("20200526064642_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -28,6 +28,9 @@ namespace Demo.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("Attack")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CorrelationId")
                         .HasColumnType("int");
 
                     b.Property<int>("Defense")
@@ -68,6 +71,9 @@ namespace Demo.Migrations
 
                     b.Property<decimal>("Cooldown")
                         .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("CorrelationId")
+                        .HasColumnType("int");
 
                     b.Property<int>("Cost")
                         .HasColumnType("int");

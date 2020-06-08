@@ -20,7 +20,8 @@ namespace Demo.Migrations
                     Defense = table.Column<int>(nullable: false),
                     MagicAttack = table.Column<int>(nullable: false),
                     MagicDefense = table.Column<int>(nullable: false),
-                    Level = table.Column<int>(nullable: false)
+                    Level = table.Column<int>(nullable: false),
+                    CorrelationId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -38,7 +39,8 @@ namespace Demo.Migrations
                     Cost = table.Column<int>(nullable: false),
                     Cooldown = table.Column<decimal>(nullable: false),
                     Level = table.Column<int>(nullable: false),
-                    IsLearned = table.Column<bool>(nullable: false)
+                    IsLearned = table.Column<bool>(nullable: false),
+                    CorrelationId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
