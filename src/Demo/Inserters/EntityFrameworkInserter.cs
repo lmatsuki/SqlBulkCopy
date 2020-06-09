@@ -16,19 +16,45 @@ namespace Demo.Inserters
         public async Task InsertRecords(int recordCount)
         {
             var stopwatch = new Stopwatch();
-            IList<Player> players = InsertExtensions.GetPlayers(recordCount);
+            IEnumerable<IEnumerable<Player>> players = InsertExtensions.GetPlayers(recordCount).Chunk(10000);
 
             stopwatch.Start();
 
+            List<Task> tasks = new List<Task>();
+            using (SemaphoreSlim throttler = new SemaphoreSlim(2))
+            {
+                foreach (var element in players)
+                {
+                    await throttler.WaitAsync().ConfigureAwait(false);
+                    tasks.Add(Task.Run(async () =>
+                    {
+                        try
+                        {
+                            await InsertPlayers(element).ConfigureAwait(false);
+                        }
+                        finally
+                        {
+                            // ReSharper disable once AccessToDisposedClosure
+                            throttler.Release();
+                        }
+                    }));
+                }
+
+                await Task.WhenAll(tasks).ConfigureAwait(false);
+            }
+
+            stopwatch.Stop();
+            Console.WriteLine("Inserting {0} players with related skills using Entity Framework took: {1}!", recordCount, stopwatch.Elapsed);
+        }
+
+        public async Task InsertPlayers(IEnumerable<Player> players)
+        {
             using (var context = new GameContext())
             {
                 context.ChangeTracker.AutoDetectChangesEnabled = false;
                 context.Players.AddRange(players);
                 await context.SaveChangesAsync();
             }
-
-            stopwatch.Stop();
-            Console.WriteLine("Inserting {0} players with related skills using Entity Framework took: {1}!", players.Count, stopwatch.Elapsed);
         }
 
         public async Task DeleteRecords()

@@ -15,7 +15,7 @@ namespace Demo
                 //IInserter inserter = new SqlBulkCopyInserter();
 
                 // Specify record count
-                await inserter.InsertRecords(25000);
+                await inserter.InsertRecords(100000);
                 await inserter.DeleteRecords();
             }
             catch (Exception ex)
