@@ -22,6 +22,7 @@ namespace Demo.Inserters
 
             using (var context = new GameContext())
             {
+                context.ChangeTracker.AutoDetectChangesEnabled = false;
                 context.Players.AddRange(players);
                 await context.SaveChangesAsync();
             }
