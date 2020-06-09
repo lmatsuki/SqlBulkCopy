@@ -1,11 +1,12 @@
 ﻿using Demo.Inserters;
 using System;
+using System.Threading.Tasks;
 
 namespace Demo
 {
     public class Program
     {
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
             try
             {
@@ -14,8 +15,8 @@ namespace Demo
                 //IInserter inserter = new SqlBulkCopyInserter();
 
                 // Specify record count
-                inserter.InsertRecords(100000);
-                inserter.DeleteRecords();
+                await inserter.InsertRecords(100000);
+                await inserter.DeleteRecords();
             }
             catch (Exception ex)
             {
