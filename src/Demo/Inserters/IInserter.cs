@@ -1,9 +1,11 @@
-﻿namespace Demo.Inserters
+﻿using System.Threading.Tasks;
+
+namespace Demo.Inserters
 {
     public interface IInserter
     {
-        void InsertRecords(int recordCount);
+        Task InsertRecords(int recordCount);
 
-        void DeleteRecords();
+        Task DeleteRecords();
     }
 }
